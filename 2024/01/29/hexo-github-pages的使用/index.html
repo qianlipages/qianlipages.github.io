@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>hexo+github pages的使用 | Hexo</title>
+  <meta name="description" content="安装Node.js  我第一次做的时候可能是只做了add和use，导致打开一个新的powershell的时候，无法使用hexo命令（因为node -v显示不出，node.js没有成功安装）  hexo安装、初始化、发布文章、本地网站（hexo本地服务器）打开、部署基本   这里git config其实配置的是~&#x2F;.gitconfig文件，和下文的git config –global us">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo+github pages的使用">
+<meta property="og:url" content="https://qianlipages.github.io/2024/01/29/hexo-github-pages%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="安装Node.js  我第一次做的时候可能是只做了add和use，导致打开一个新的powershell的时候，无法使用hexo命令（因为node -v显示不出，node.js没有成功安装）  hexo安装、初始化、发布文章、本地网站（hexo本地服务器）打开、部署基本   这里git config其实配置的是~&#x2F;.gitconfig文件，和下文的git config –global us">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/nvs%E5%AE%89%E8%A3%85node%E4%BF%9D%E5%AD%98%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/hexo%E5%AE%89%E8%A3%85.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/hexo%E5%88%9D%E5%A7%8B%E5%8C%96.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/gitconfig.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/theme_pure.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/Home%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B21.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B22.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/%E9%83%A8%E7%BD%B2%E7%9A%84url%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/%E9%83%A8%E7%BD%B2%E7%9A%84deploy%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/gpt%E6%89%93%E5%BC%80ssh-agent.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/gpt%E9%97%AE%E9%A2%98%E4%B8%80%E5%9B%BE1.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/gpt%E9%97%AE%E9%A2%98%E4%B8%80%E5%9B%BE2.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/gpt%E9%97%AE%E9%A2%98%E4%BA%8C.png">
+<meta property="og:image" content="https://qianlipages.github.io/images/0129/%E9%97%AE%E9%A2%98%E4%BA%8C.png">
+<meta property="article:published_time" content="2024-01-29T04:48:07.000Z">
+<meta property="article:modified_time" content="2024-01-29T07:06:55.917Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qianlipages.github.io/images/0129/nvs%E5%AE%89%E8%A3%85node%E4%BF%9D%E5%AD%98%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://qianlipages.github.io/2024/01/29/hexo-github-pages%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xxx695470536" target="_blank">
+          <img class="img-circle img-rotate" src="/images/opengl.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Qianli</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Software Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shanghai, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xxx695470536" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2024/01/29/hexo-github-pages%E7%9A%84%E4%BD%BF%E7%94%A8/" class="title">hexo+github pages的使用</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-01-29T04:48:07.000Z" itemprop="datePublished">2024-01-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2024/01/28/hello-world/" class="title">Hello World</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-01-28T05:54:30.929Z" itemprop="datePublished">2024-01-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hexo-github-pages的使用" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hexo+github pages的使用
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2024/01/29/hexo-github-pages%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+	  <time datetime="2024-01-29T04:48:07.000Z" itemprop="datePublished">2024-01-29</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/01/29/hexo-github-pages%E7%9A%84%E4%BD%BF%E7%94%A8/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p><img src="/../images/0129/nvs%E5%AE%89%E8%A3%85node%E4%BF%9D%E5%AD%98%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" alt="安装"></p>
+<blockquote>
+<p>我第一次做的时候可能是只做了add和use，导致打开一个新的powershell的时候，无法使用hexo命令（因为node -v显示不出，node.js没有成功安装）</p>
+</blockquote>
+<h3 id="hexo安装、初始化、发布文章、本地网站（hexo本地服务器）打开、部署基本"><a href="#hexo安装、初始化、发布文章、本地网站（hexo本地服务器）打开、部署基本" class="headerlink" title="hexo安装、初始化、发布文章、本地网站（hexo本地服务器）打开、部署基本"></a>hexo安装、初始化、发布文章、本地网站（hexo本地服务器）打开、部署基本</h3><p><img src="/../images/0129/hexo%E5%AE%89%E8%A3%85.png" alt="安装"></p>
+<p><img src="/../images/0129/hexo%E5%88%9D%E5%A7%8B%E5%8C%96.png" alt="安装"></p>
+<blockquote>
+<p>这里git config其实配置的是~&#x2F;.gitconfig文件，和下文的git config –global user.name(user.email)配置的是同一个文件（c&#x2F;用户&#x2F;huawei&#x2F;.gitconfig文件）</p>
+</blockquote>
+<p><img src="/../images/0129/gitconfig.png" alt="c/用户/huawei/.gitconfig文件"></p>
+<blockquote>
+<p>发布文章用<code>hexo new &quot;文章的题目&quot;</code>，文章在source&#x2F;_posts，图片在source&#x2F;images</p>
+<p>本地网站打开用<code>hexo server</code></p>
+<p>部署用<code>hexo clean</code>、<code>hexo generate</code>、<code>hexo deploy</code></p>
+</blockquote>
+<h3 id="hexo本地网页的custom设置"><a href="#hexo本地网页的custom设置" class="headerlink" title="hexo本地网页的custom设置"></a>hexo本地网页的custom设置</h3><p>我选择了作者cofess的theme主题，仓库及中文文档的地址是：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/cofess/hexo-theme-pure/blob/master/README.cn.md">https://github.com/cofess/hexo-theme-pure/blob/master/README.cn.md</a></p>
+<p><img src="/../images/0129/theme_pure.png" alt="主题设置"></p>
+<blockquote>
+<p>首先拷贝仓库，则在hexo的文件夹下会多出一个themes文件夹</p>
+<p>hexo s表示hexo server，可以在本地看到网站</p>
+</blockquote>
+<p>修改themes下的_config.yml：</p>
+<p><img src="/../images/0129/%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E8%AE%BE%E7%BD%AE.png" alt="个人简介设置"></p>
+<blockquote>
+<p>个人简介这边images&#x2F;opengl.jpg可以改头像</p>
+<p>location和author, autor_title直接改掉</p>
+<p>follow改掉，点击头像就会跳转github的主页</p>
+<p>social下面把weibo~rss给注释掉，就不会显示这几个社交媒体的图标，social下面的github改掉，则点击github图标也会跳转github的主页</p>
+</blockquote>
+<p><img src="/../images/0129/Home%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%AE%BE%E7%BD%AE.png" alt="Home侧边栏设置"></p>
+<blockquote>
+<p>menu这边，可以添加或删除侧边栏页面导航</p>
+</blockquote>
+<p><img src="/../images/0129/%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2%E8%AE%BE%E7%BD%AE.png" alt="主题颜色设置"></p>
+<blockquote>
+<p>主题这边，如果什么都不写只有<code>skin:</code> ，则是白色主题，否则可以设置黑色、绿色等主题</p>
+</blockquote>
+<hr>
+<h3 id="hexo部署（发布到github-pages）"><a href="#hexo部署（发布到github-pages）" class="headerlink" title="hexo部署（发布到github pages）"></a>hexo部署（发布到github pages）</h3><p>我采用的是官网的一键部署，注意，全程不需要<code>git init</code>、<code>git remote add</code>+在hexo这个文件夹下本身也不能够使用git命令：</p>
+<p>首先，在github创建仓库，仓库的名字是自己的github账号名字+github.io，选择public，不需要readme.md，剩下的跟着hexo官网教程的一键部署就行：</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/one-command-deployment">部署 | Hexo</a></p>
+<p>或者参考hexo-deployment-git这个一键部署工具的仓库：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">https://github.com/hexojs/hexo-deployer-git</a></p>
+<p><img src="/../images/0129/%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B21.png" alt="部署"></p>
+<p><img src="/../images/0129/%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B22.png" alt="部署"></p>
+<blockquote>
+<p><code>hexo generate</code>会创建public文件夹，也就是全部会被push到github仓库的文件</p>
+</blockquote>
+<p>在hexo文件夹的_config.yml应该设置的是url以及deploy</p>
+<p><img src="/../images/0129/%E9%83%A8%E7%BD%B2%E7%9A%84url%E8%AE%BE%E7%BD%AE.png" alt="部署的url设置"></p>
+<p><img src="/../images/0129/%E9%83%A8%E7%BD%B2%E7%9A%84deploy%E8%AE%BE%E7%BD%AE.png" alt="部署的deploy设置"></p>
+<p>每次传的时候主要是下面三条命令：</p>
+<ul>
+<li><p>hexo clean</p>
+</li>
+<li><p>hexo g（hexo generate）</p>
+</li>
+<li><p>hexo deploy</p>
+</li>
+</ul>
+<hr>
+<p>部署时有两个关键问题：</p>
+<h4 id="关键问题一"><a href="#关键问题一" class="headerlink" title="关键问题一"></a>关键问题一</h4><p>背景：</p>
+<p>我创建了一个新的谷歌邮箱</p>
+<p>然后基于这个邮箱创建了一个新的github账号</p>
+<p>然后基于这个github账号创建了一个github pages</p>
+<p>然后我想push东西到这个github pages</p>
+<p>但是一直提示我denied to xxx695470536（原来的github账号）</p>
+<hr>
+<p>其实一共有三个地方需要改：</p>
+<ul>
+<li><p>~&#x2F;.ssh文件夹下的公钥和私钥都需要修改，有以下注意事项：</p>
+<ul>
+<li><p>使用rsa算法（有rsa和ed25519两种算法）</p>
+</li>
+<li><p>首先要确保<del>&#x2F;.ssh&#x2F;id_rsa和</del>&#x2F;.ssh&#x2F;id_rsa.pub两个文件删除，否则覆盖写入的时候会有问题</p>
+</li>
+<li><p>私钥设置时，使用git bash（windows powershell不行）开启ssh-agent（下图），然后再<code>ssh-add ~/.ssh/id_rsa</code></p>
+<p><img src="/../images/0129/gpt%E6%89%93%E5%BC%80ssh-agent.png" alt="chatgpt"></p>
+<blockquote>
+<p>ssh -vT <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#104;&#117;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#104;&#117;&#98;&#x2e;&#99;&#111;&#109;</a>会连不上，timed out，但是不影响，不需要连上</p>
+</blockquote>
+<p>![部署的deploy设置](..&#x2F;images&#x2F;0129&#x2F;git bash后台开启ssh-agent.png)</p>
+</li>
+<li><p>公钥设置时，拷贝id_rsa.pub到github官网的settings-&gt;ssh and gpg keys，这里需要公钥的名字，名字可以随便取，我取了ssh-rsa</p>
+</li>
+</ul>
+<blockquote>
+<p>公钥和私钥添加可以看github官网，不过我没有用ed25519的算法，用了rsa算法：<br><a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account</a></p>
+</blockquote>
+</li>
+<li><p>win搜索：凭据管理器</p>
+<p>然后找到git，然后把账号改成qianlipages，密码不是对应github账号的登陆密码，而是对应qianlipages的github账号的settings-&gt;developer settings-&gt;personal access tokens（从github官网生成）</p>
+<p><img src="/../images/0129/gpt%E9%97%AE%E9%A2%98%E4%B8%80%E5%9B%BE1.png" alt="关键问题一"></p>
+<p><img src="/../images/0129/gpt%E9%97%AE%E9%A2%98%E4%B8%80%E5%9B%BE2.png" alt="关键问题一"></p>
+</li>
+<li><p>设置邮箱和用户名</p>
+<p>git config –global user.name “qianlicnpages”</p>
+<p>git config –global user.email “<a href="mailto:&#113;&#105;&#x61;&#110;&#x6c;&#x69;&#99;&#110;&#x32;&#48;&#x32;&#51;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#109;">&#113;&#105;&#x61;&#110;&#x6c;&#x69;&#99;&#110;&#x32;&#48;&#x32;&#51;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#109;</a>“</p>
+<blockquote>
+<p>这里的用户名和邮箱其实和~.&#x2F;gitconfig里的内容是一样的</p>
+</blockquote>
+<p>而如果是希望仓库的用户名和邮箱修改，则在仓库输入：</p>
+<p>git config user.name “qianlicnpages”</p>
+<p>git config user.email “<a href="mailto:&#113;&#x69;&#x61;&#x6e;&#x6c;&#105;&#99;&#110;&#x32;&#x30;&#50;&#51;&#x40;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;">&#113;&#x69;&#x61;&#x6e;&#x6c;&#105;&#99;&#110;&#x32;&#x30;&#50;&#51;&#x40;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;</a>“</p>
+</li>
+</ul>
+<p>当这个问题解决以后，push就能成功了，此时打开自己的仓库地址是能看到commit的记录的</p>
+<p>准确来说当我改完凭据管理器，空的仓库立刻就有文件了，虽然显示的是十几分钟前的更新</p>
+<hr>
+<h4 id="关键问题二"><a href="#关键问题二" class="headerlink" title="关键问题二"></a>关键问题二</h4><p>当我push成功，仓库也能看到我push的文件了，但是qianlipages.github.io看不到网页</p>
+<p>chatgpt告诉我通过仓库的settings-&gt;pages选择gh-pages，刚刚设置完，立刻就看到settings-&gt;pages这边显示了我的github pages的地址！此时仓库的settings-&gt;general的default branch也会变成gh-pages</p>
+<p><img src="/../images/0129/gpt%E9%97%AE%E9%A2%98%E4%BA%8C.png" alt="关键问题一"></p>
+<p><img src="/../images/0129/%E9%97%AE%E9%A2%98%E4%BA%8C.png" alt="关键问题二"></p>
+<blockquote>
+<p>在选择gh-pages之前的选项是None，build and deployment上边是不会显示your site is live at这一段的</p>
+<p>在选择gh-pages之后立刻就显示出来了，对应的qianlipages.github.com也立刻能刷出来</p>
+<p>如果设置了custom domain，另外需要CNAME文件，表示另外的域名(chatgpt提到的网页404的原因之一)</p>
+</blockquote>
+<hr>
+<p>其实两个最关键的问题都是chatgpt帮我解决的。。。chatgpt真是太造福人类了！</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://qianlipages.github.io/2024/01/29/hexo-github-pages%E7%9A%84%E4%BD%BF%E7%94%A8/" title="hexo+github pages的使用" target="_blank" rel="external">https://qianlipages.github.io/2024/01/29/hexo-github-pages的使用/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xxx695470536" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/opengl.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xxx695470536" target="_blank"><span class="text-dark">Qianli</span><small class="ml-1x">Software Engineer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2024/01/28/hello-world/" title="Hello World"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xxx695470536" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
